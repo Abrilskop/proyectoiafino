@@ -5,6 +5,7 @@
 #   .\run.ps1                 -> inicia la API en http://127.0.0.1:8000
 #   .\run.ps1 -Port 9000      -> cambia el puerto
 #   .\run.ps1 -Full           -> ejecuta TODO el pipeline y luego inicia la API
+#   .\run.ps1 -Ui             -> inicia API + interfaz web en http://127.0.0.1:7860/ui
 #
 # Si da error de permisos, ejecuta una vez:
 #   Set-ExecutionPolicy -Scope Process RemoteSigned
@@ -12,7 +13,8 @@
 param(
     [int]$Port = 8000,
     [string]$Host_ = "127.0.0.1",
-    [switch]$Full
+    [switch]$Full,
+    [switch]$Ui
 )
 
 $ErrorActionPreference = "Stop"
@@ -20,6 +22,13 @@ $Root = $PSScriptRoot
 Set-Location $Root
 
 $env:PYTHONUTF8 = "1"
+
+if ($Ui -and -not $PSBoundParameters.ContainsKey("Port")) { $Port = 7860 }
+if ($Ui) {
+    $env:SVHN_MOUNT_UI = "1"
+    $env:SVHN_API_URL = "http://${Host_}:$Port"
+}
+
 $Python = Join-Path $Root ".venv\Scripts\python.exe"
 if (-not (Test-Path $Python)) {
     Write-Host "No se encontro el entorno virtual; usando 'python' del sistema." -ForegroundColor Yellow
@@ -48,6 +57,9 @@ if ($Full) {
 Write-Host ""
 Write-Host "Iniciando API SVHN en http://${Host_}:$Port" -ForegroundColor Green
 Write-Host "Documentacion interactiva: http://${Host_}:$Port/docs" -ForegroundColor Green
+if ($Ui) {
+    Write-Host "Interfaz web (UI):          http://${Host_}:$Port/ui" -ForegroundColor Green
+}
 Write-Host "Detener con Ctrl+C" -ForegroundColor DarkGray
 Write-Host ""
 

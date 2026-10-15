@@ -8,6 +8,7 @@ Cada peticion se registra (logging) y se le aplica un chequeo de drift.
 from __future__ import annotations
 
 import io
+import os
 import sys
 from pathlib import Path
 
@@ -83,6 +84,20 @@ def create_app(model_path: str | Path | None = None) -> FastAPI:
             "probabilities": result["probabilities"],
             "drift": drift,
         }
+
+    # Monta opcionalmente la UI de Gradio en /ui.
+    # Se activa con SVHN_MOUNT_UI=1 y solo si gradio esta instalado, para que
+    # los tests sigan corriendo sin depender de gradio.
+    mount_ui = os.environ.get("SVHN_MOUNT_UI") == "1"
+    if mount_ui:
+        try:
+            import gradio as gr
+
+            from deployment.gradio_app import build_ui
+
+            gr.mount_gradio_app(app, build_ui(), path="/ui")
+        except Exception as exc:  # noqa: BLE001
+            app.state.ui_error = str(exc)
 
     return app
 
