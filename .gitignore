@@ -23,6 +23,7 @@ models/*.onnx
 
 # Reportes generados
 reports/*.json
+reports/*.jsonl
 reports/figures/*.png
 !reports/figures/.gitkeep
 
