@@ -29,7 +29,7 @@ logistica de ultima milla y validar direcciones en navegacion.
 | O.E.3 | Preparacion de los datos | 2 | `data/processed/*.pt` + `reports/oe3_preparation.json` |
 | O.E.4 | Modelado | 2 | `models/best.pt` + `reports/oe4_training.json` + `reports/figures/training_curves.png` |
 | O.E.5 | Evaluacion | 3 | `reports/metrics.json` + `reports/figures/confusion_matrix.png` |
-| O.E.6 | Despliegue ML-Ops | 3 | API `/predict` + `models/model.onnx` + `reports/predictions.jsonl` |
+| O.E.6 | Despliegue ML-Ops | 3 | API `/predict` + UI web en `/ui` (Gradio) + `models/model.onnx` + `reports/predictions.jsonl` |
 
 Notebooks de sustentacion (una por objetivo): `notebooks/01..05_*.ipynb` y
 `notebooks/06_demo_despliegue.ipynb`.
@@ -56,7 +56,8 @@ Notebooks de sustentacion (una por objetivo): `notebooks/01..05_*.ipynb` y
 │   ├── data/{download,eda,preprocess,dataset}.py
 │   ├── models/{cnn,resnet}.py
 │   ├── engine.py  train.py  evaluate.py  predict.py
-├── deployment/{app.py,Dockerfile,docker-compose.yml}
+├── deployment/{app.py,gradio_app.py,Dockerfile,docker-compose.yml}
+│   └── hf_space/                # plantilla lista para Hugging Face Spaces
 ├── monitoring/{logging,drift}.py
 ├── tests/
 ├── models/  reports/
@@ -92,11 +93,21 @@ make test    # pytest
 ## Despliegue
 
 ```powershell
-# Local
+# Local (solo API)
 uvicorn deployment.app:app --host 0.0.0.0 --port 8000
+
+# Local (API + interfaz web en http://127.0.0.1:7860/ui)
+.\run.ps1 -Ui
 
 # Docker
 docker compose -f deployment/docker-compose.yml up --build
+```
+
+Tambien puedes correr solo la UI apuntando a una API existente:
+
+```powershell
+$env:SVHN_API_URL = "http://127.0.0.1:8000"
+python deployment/gradio_app.py     # UI en http://127.0.0.1:7860
 ```
 
 Probar la API:
@@ -116,6 +127,22 @@ Respuesta:
   "drift": { "drift_detected": false, "drift_score": 0.01 }
 }
 ```
+
+## Como probarlo online (Hugging Face Spaces)
+
+La carpeta `deployment/hf_space/` es una plantilla lista para publicar el demo
+(sdk `docker`, `app_port` 7860, UI montada en `/ui`):
+
+```powershell
+.\deployment\hf_space\sync.ps1                     # copia codigo + models/best.pt
+cd deployment\hf_space
+git init
+git remote add origin https://huggingface.co/spaces/<USUARIO>/<NOMBRE>
+git add . ; git commit -m "chore(space): despliegue SVHN"
+git push -u origin main
+```
+
+Una vez publicado, el demo queda en `https://huggingface.co/spaces/<USUARIO>/<NOMBRE>`.
 
 ## Notas
 
