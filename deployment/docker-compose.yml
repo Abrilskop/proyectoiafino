@@ -1,0 +1,17 @@
+services:
+  svhn-api:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    image: svhn-api:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
