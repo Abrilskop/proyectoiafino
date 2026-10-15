@@ -34,3 +34,10 @@ mlruns/*
 # Temporales locales
 /sample.png
 .dist/
+
+# HF Space: codigo copiado por sync.ps1 (vive en el repo del Space, no aqui)
+deployment/hf_space/src/
+deployment/hf_space/monitoring/
+deployment/hf_space/configs/
+deployment/hf_space/deployment/
+deployment/hf_space/models/
