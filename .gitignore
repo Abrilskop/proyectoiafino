@@ -1,0 +1,35 @@
+# Entornos
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Datos (se descargan; no versionar)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Artefactos de modelo
+models/*.pt
+models/*.onnx
+!models/.gitkeep
+
+# Reportes generados
+reports/*.json
+reports/figures/*.png
+!reports/figures/.gitkeep
+
+# MLflow
+mlruns/*
+!mlruns/.gitkeep
+
+# Temporales locales
+/sample.png
+.dist/

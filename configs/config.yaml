@@ -1,0 +1,51 @@
+# ===========================================================================
+# O.E.1 - Comprension del negocio (Sprint 1)
+# Configuracion central del proyecto. Aqui viven los KPIs y parametros.
+# ===========================================================================
+
+project:
+  name: svhn-house-number-recognition
+  version: "1.0.0"
+  seed: 42
+
+# --- Objetivo / criterios de exito (KPI) -----------------------------------
+business:
+  problem: >-
+    Reconocer automaticamente digitos de numeros de casa en imagenes de
+    Street View para poblar bases de direcciones (GIS/OSM) y logistica.
+  target_metric: accuracy
+  target_value: 0.80          # umbral minimo de exito en el subconjunto (CPU)
+  stretch_value: 0.96         # objetivo con dataset completo / GPU
+  max_latency_ms: 50          # latencia maxima por inferencia
+  num_classes: 10
+  classes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# --- Datos ------------------------------------------------------------------
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  subset_fraction: 0.20       # fraccion del train para entrenamiento (sin GPU)
+  val_fraction: 0.10          # fraccion de validacion sobre el subset
+  image_size: 32
+  channels: 3
+  mean: [0.4377, 0.4438, 0.4728]
+  std: [0.1980, 0.2010, 0.1970]
+  num_workers: 0              # 0 = seguro en Windows/CPU
+
+# --- Modelo / entrenamiento -------------------------------------------------
+training:
+  model: cnn                  # cnn | resnet18
+  batch_size: 128
+  epochs: 8
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  augment: true
+
+# --- Rutas de artefactos ----------------------------------------------------
+paths:
+  model_dir: models
+  best_model: models/best.pt
+  onnx_model: models/model.onnx
+  reports_dir: reports
+  figures_dir: reports/figures
+  metrics_json: reports/metrics.json
