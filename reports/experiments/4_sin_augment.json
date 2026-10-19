@@ -1,0 +1,45 @@
+{
+  "name": "4_sin_augment",
+  "config": {
+    "name": "4_sin_augment",
+    "optimizer": "adam",
+    "dropout": 0.3,
+    "augment": false,
+    "batchnorm": true
+  },
+  "epochs": 4,
+  "n_train": 8000,
+  "history": {
+    "train_loss": [
+      2.2343,
+      2.0135,
+      1.5176,
+      1.025
+    ],
+    "train_acc": [
+      0.2004,
+      0.2878,
+      0.4645,
+      0.6489
+    ],
+    "val_loss": [
+      2.1552,
+      1.8978,
+      1.3102,
+      0.976
+    ],
+    "val_acc": [
+      0.2307,
+      0.3119,
+      0.5283,
+      0.6689
+    ]
+  },
+  "best_val_acc": 0.6689,
+  "final_train_acc": 0.6489,
+  "final_val_acc": 0.6689,
+  "test_acc": 0.7007,
+  "test_loss": 0.9311,
+  "gap_train_val": -0.02,
+  "seconds": 274.2
+}

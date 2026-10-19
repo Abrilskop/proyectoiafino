@@ -40,6 +40,10 @@ training:
   learning_rate: 0.001
   weight_decay: 0.0001
   augment: true
+  optimizer: adam            # adam | sgd
+  p_dropout: 0.3
+  augment_rotation: true     # rotaciones aleatorias (Fase C)
+  augment_zoom: true         # zoom aleatorio (Fase C)
 
 # --- Rutas de artefactos ----------------------------------------------------
 paths:

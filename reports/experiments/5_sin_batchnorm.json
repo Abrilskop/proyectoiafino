@@ -1,0 +1,45 @@
+{
+  "name": "5_sin_batchnorm",
+  "config": {
+    "name": "5_sin_batchnorm",
+    "optimizer": "adam",
+    "dropout": 0.3,
+    "augment": true,
+    "batchnorm": false
+  },
+  "epochs": 4,
+  "n_train": 8000,
+  "history": {
+    "train_loss": [
+      2.2542,
+      2.2421,
+      2.2409,
+      2.2403
+    ],
+    "train_acc": [
+      0.1905,
+      0.1915,
+      0.1915,
+      0.1915
+    ],
+    "val_loss": [
+      2.2424,
+      2.2407,
+      2.2382,
+      2.2374
+    ],
+    "val_acc": [
+      0.1836,
+      0.1836,
+      0.1836,
+      0.1836
+    ]
+  },
+  "best_val_acc": 0.1836,
+  "final_train_acc": 0.1915,
+  "final_val_acc": 0.1836,
+  "test_acc": 0.1959,
+  "test_loss": 2.2257,
+  "gap_train_val": 0.0079,
+  "seconds": 318.1
+}

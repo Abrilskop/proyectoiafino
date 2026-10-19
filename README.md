@@ -144,6 +144,21 @@ git push -u origin main
 
 Una vez publicado, el demo queda en `https://huggingface.co/spaces/<USUARIO>/<NOMBRE>`.
 
+## Actividad: Diseño y Optimización de una CNN
+
+Entregables de la actividad de laboratorio (Fases A-C):
+
+| Fase | Contenido | Evidencia |
+|------|-----------|-----------|
+| A | Preparación y preprocesamiento | `configs/config.yaml`, `data/processed/*.pt` |
+| B | Modelo base (Conv 3×3 + MaxPool + Softmax + BatchNorm) | `src/models/cnn.py` |
+| C | Experimentos (Dropout, SGD vs Adam, Augmentation, BatchNorm) | `src/experiments.py` → `reports/experiments/` |
+
+- **Notebook ejecutado:** `notebooks/actividad_cnn.ipynb`
+- **Informe PDF:** `reports/actividad_cnn.pdf`
+- Correr experimentos: `python -m src.experiments --epochs 4 --max-train 8000`
+- Generar el PDF: `python -m src.report`
+
 ## Notas
 
 - Sin GPU: se entrena sobre un **subconjunto** (`data.subset_fraction` en el YAML).

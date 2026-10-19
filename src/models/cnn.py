@@ -8,19 +8,25 @@ import torch.nn as nn
 class DigitCNN(nn.Module):
     """Red convolucional ligera: 3 bloques conv + clasificador denso."""
 
-    def __init__(self, num_classes: int = 10, p_dropout: float = 0.3):
+    def __init__(
+        self,
+        num_classes: int = 10,
+        p_dropout: float = 0.3,
+        use_batchnorm: bool = True,
+    ):
         super().__init__()
 
         def block(in_ch: int, out_ch: int) -> nn.Sequential:
-            return nn.Sequential(
-                nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1),
-                nn.BatchNorm2d(out_ch),
-                nn.ReLU(inplace=True),
-                nn.Conv2d(out_ch, out_ch, kernel_size=3, padding=1),
-                nn.BatchNorm2d(out_ch),
-                nn.ReLU(inplace=True),
-                nn.MaxPool2d(2),  # /2
-            )
+            layers = [nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1)]
+            if use_batchnorm:
+                layers.append(nn.BatchNorm2d(out_ch))
+            layers.append(nn.ReLU(inplace=True))
+            layers.append(nn.Conv2d(out_ch, out_ch, kernel_size=3, padding=1))
+            if use_batchnorm:
+                layers.append(nn.BatchNorm2d(out_ch))
+            layers.append(nn.ReLU(inplace=True))
+            layers.append(nn.MaxPool2d(2))  # /2
+            return nn.Sequential(*layers)
 
         self.features = nn.Sequential(
             block(3, 32),    # 32 -> 16

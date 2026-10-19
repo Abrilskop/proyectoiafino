@@ -1,0 +1,45 @@
+{
+  "name": "2_sin_dropout",
+  "config": {
+    "name": "2_sin_dropout",
+    "optimizer": "adam",
+    "dropout": 0.0,
+    "augment": true,
+    "batchnorm": true
+  },
+  "epochs": 4,
+  "n_train": 8000,
+  "history": {
+    "train_loss": [
+      2.2352,
+      2.0625,
+      1.5849,
+      1.1497
+    ],
+    "train_acc": [
+      0.1939,
+      0.2657,
+      0.4672,
+      0.6184
+    ],
+    "val_loss": [
+      2.4601,
+      1.9134,
+      1.5487,
+      1.3083
+    ],
+    "val_acc": [
+      0.198,
+      0.2956,
+      0.471,
+      0.5795
+    ]
+  },
+  "best_val_acc": 0.5795,
+  "final_train_acc": 0.6184,
+  "final_val_acc": 0.5795,
+  "test_acc": 0.6432,
+  "test_loss": 1.0667,
+  "gap_train_val": 0.0389,
+  "seconds": 321.1
+}

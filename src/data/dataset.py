@@ -49,6 +49,10 @@ def build_transforms(cfg: dict, train: bool):
     steps = [transforms.ConvertImageDtype(torch.float32)]
     if train and cfg["training"].get("augment", True):
         steps.append(transforms.RandomCrop(size, padding=4))
+        if cfg["training"].get("augment_rotation", False):
+            steps.append(transforms.RandomRotation(15))
+        if cfg["training"].get("augment_zoom", False):
+            steps.append(transforms.RandomAffine(degrees=0, scale=(0.85, 1.15)))
         steps.append(transforms.ColorJitter(brightness=0.2, contrast=0.2))
     steps.append(transforms.Normalize(mean=mean, std=std))
     return transforms.Compose(steps)

@@ -1,0 +1,6 @@
+Experimento,Dropout,Optimizador,Aug (rot/zoom),BatchNorm,Train acc,Val acc,Test acc,Gap (overfit)
+1_baseline,si,ADAM,si,si,0.436,0.497,0.515,-0.060
+2_sin_dropout,no,ADAM,si,si,0.618,0.580,0.643,+0.039
+3_sgd,si,SGD,si,si,0.183,0.184,0.196,-0.000
+4_sin_augment,si,ADAM,no,si,0.649,0.669,0.701,-0.020
+5_sin_batchnorm,si,ADAM,si,no,0.192,0.184,0.196,+0.008

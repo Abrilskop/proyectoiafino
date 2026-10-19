@@ -1,0 +1,45 @@
+{
+  "name": "1_baseline",
+  "config": {
+    "name": "1_baseline",
+    "optimizer": "adam",
+    "dropout": 0.3,
+    "augment": true,
+    "batchnorm": true
+  },
+  "epochs": 4,
+  "n_train": 8000,
+  "history": {
+    "train_loss": [
+      2.2533,
+      2.1384,
+      1.97,
+      1.6227
+    ],
+    "train_acc": [
+      0.1839,
+      0.2414,
+      0.297,
+      0.4365
+    ],
+    "val_loss": [
+      2.6281,
+      2.0284,
+      1.7759,
+      1.4232
+    ],
+    "val_acc": [
+      0.1863,
+      0.2655,
+      0.3727,
+      0.4969
+    ]
+  },
+  "best_val_acc": 0.4969,
+  "final_train_acc": 0.4365,
+  "final_val_acc": 0.4969,
+  "test_acc": 0.5148,
+  "test_loss": 1.4111,
+  "gap_train_val": -0.0604,
+  "seconds": 337.1
+}

@@ -1,0 +1,45 @@
+{
+  "name": "3_sgd",
+  "config": {
+    "name": "3_sgd",
+    "optimizer": "sgd",
+    "dropout": 0.3,
+    "augment": true,
+    "batchnorm": true
+  },
+  "epochs": 4,
+  "n_train": 8000,
+  "history": {
+    "train_loss": [
+      2.2761,
+      2.2579,
+      2.2517,
+      2.2523
+    ],
+    "train_acc": [
+      0.1648,
+      0.184,
+      0.1844,
+      0.1834
+    ],
+    "val_loss": [
+      2.2462,
+      2.2383,
+      2.234,
+      2.2304
+    ],
+    "val_acc": [
+      0.1836,
+      0.1843,
+      0.1836,
+      0.1836
+    ]
+  },
+  "best_val_acc": 0.1843,
+  "final_train_acc": 0.1834,
+  "final_val_acc": 0.1836,
+  "test_acc": 0.1959,
+  "test_loss": 2.2199,
+  "gap_train_val": -0.0002,
+  "seconds": 396.4
+}
