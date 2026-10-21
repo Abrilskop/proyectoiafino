@@ -156,8 +156,10 @@ Entregables de la actividad de laboratorio (Fases A-C):
 
 - **Notebook ejecutado:** `notebooks/actividad_cnn.ipynb`
 - **Informe PDF:** `reports/actividad_cnn.pdf`
+- **Informe Word (APA 7):** `reports/actividad_cnn.docx`
 - Correr experimentos: `python -m src.experiments --epochs 4 --max-train 8000`
 - Generar el PDF: `python -m src.report`
+- Generar el Word (APA 7): `python -m src.report_docx`
 
 ## Notas
 
